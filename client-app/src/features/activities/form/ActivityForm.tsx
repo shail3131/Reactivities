@@ -1,4 +1,4 @@
-import React, { useState, FormEvent } from "react";
+import React, { useState, FormEvent} from "react";
 import { Segment, Form, Button } from "semantic-ui-react";
 import { IActivity } from "../../../app/models/activity";
 import { v4 as uuidv4 } from 'uuid';
@@ -8,12 +8,15 @@ interface IProps {
 
   createActivity:(activity: IActivity) => void;
   editActivity:(activity: IActivity) => void;
+
+  submitting : boolean;
 }
 export const ActivityForm: React.FC<IProps> = ({
   setEditMode,
   activity: initialFormState,
   createActivity,
-  editActivity
+  editActivity,
+  submitting
 }) => {
   const initializeForm = () => {
     if (initialFormState) {
@@ -75,8 +78,8 @@ export const ActivityForm: React.FC<IProps> = ({
         />
         <Form.Input
           onChange={handleInputChange}
-          type="datetime-local"
-          placeholder="Date"
+          type='datetime-local'
+          placeholder="dd/mm/yyyy"
           name="date"
           value={activity.date}
         />
@@ -92,7 +95,7 @@ export const ActivityForm: React.FC<IProps> = ({
           name="venue"
           value={activity.venue}
         />
-        <Button onClick={handleSubmit} floated="right" positive type="submit" content="Submit" />
+        <Button loading={submitting} onClick={handleSubmit} floated="right" positive type="submit" content="Submit" />
         <Button
           onClick={() => setEditMode(false)}
           floated="right"
