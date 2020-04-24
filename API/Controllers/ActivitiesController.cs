@@ -15,6 +15,7 @@ namespace API.Controllers
         private readonly IMediator _mediator;
         public ActivitiesController(IMediator mediator)
         {
+            
             _mediator = mediator;
         }
 
@@ -34,7 +35,7 @@ namespace API.Controllers
         [HttpPost]
         public async Task<ActionResult<Unit>> Create(Create.Command command)
         {
-             return await _mediator.Send(command);
+            return await _mediator.Send(command);
         }
 
         [HttpPut("{id}")]
