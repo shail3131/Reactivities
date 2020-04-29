@@ -10,7 +10,10 @@ interface IProps extends FieldRenderProps<Date,HTMLElement>, FormFieldProps{
 const DateInput: React.FC<IProps> = ({
     input,    
     width,            
-    placeholder,    
+    placeholder, 
+    date=false,
+    time=false,
+
     meta: { touched, error },
     ...rest
   }) => {
@@ -19,7 +22,11 @@ const DateInput: React.FC<IProps> = ({
         <DateTimePicker 
             placeholder={placeholder}
             value={input.value || null}
-            onChange={input.onChange}         
+            onChange={input.onChange} 
+            onBlur={input.onBlur}
+            onKeyDown={(e) => e.preventDefault()}
+            date={date}
+            time={time}        
             {...rest}
         />
         {touched && error && (
