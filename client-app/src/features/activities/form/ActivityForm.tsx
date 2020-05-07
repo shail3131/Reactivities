@@ -5,7 +5,6 @@ import { Segment, Form, Button,Grid } from 'semantic-ui-react';
 import {combineValidators, isRequired, composeValidators, hasLengthGreaterThan} from 'revalidate'
 import {  ActivityFormValues } from '../../../app/models/activity';
 import {v4 as uuid} from 'uuid';
-import ActivityStore from '../../../app/stores/activityStore'
 import {RouteComponentProps} from 'react-router'
 
 import {Form as FinalForm,Field} from 'react-final-form'
@@ -15,6 +14,7 @@ import SelectInput from '../../../app/common/form/SelectInput';
 import category from '../../../app/common/options/categoryOptions';
 import DateInput from '../../../app/common/form/DateInput';
 import { combineDateAndTime } from '../../../app/common/util/util';
+import { RootStoreContext } from '../../../app/stores/rootStore';
 
 const validate = combineValidators({
   title:isRequired({message:'The event title is required'}),
@@ -35,10 +35,10 @@ interface DetailsParams{
 
 const ActivityForm: React.FC<RouteComponentProps<DetailsParams>> = ({match,history}) => {
 
-  const activityStore= useContext(ActivityStore);
+  const rootStore = useContext(RootStoreContext);
 
   const {createActivity,editActivity,submitting,
-  loadActivity} = activityStore; 
+  loadActivity} = rootStore.activityStore; 
   
 
   const [activity, setActivity] = useState(new ActivityFormValues());
@@ -148,7 +148,7 @@ const ActivityForm: React.FC<RouteComponentProps<DetailsParams>> = ({match,histo
                   ? () => history.push(`/activities/${activity.id}`) 
                   : () => history.push('/activities')}
                 floated='right'
-                disabled ={loading|| invalid || pristine}
+                disabled ={loading}
                 type='button'
                 content='Cancel'
               />
