@@ -2,9 +2,9 @@ import React, { useContext, useState } from 'react';
 import { Tab, Header, Card, Image, Button, Grid } from 'semantic-ui-react';
 import { RootStoreContext } from '../../app/stores/rootStore';
 import PhotoUploadWidget from '../../app/common/photoUpload/PhotoUploadWidget';
-import { observer, Observer } from 'mobx-react-lite';
+import { observer } from 'mobx-react-lite';
 
-export const ProfilePhotos = () => {
+const ProfilePhotos = () => {
   const rootStore = useContext(RootStoreContext);
   const {
     profile,
@@ -88,7 +88,5 @@ export const ProfilePhotos = () => {
     </Tab.Pane>
   );
 };
-
-
 
 export default observer(ProfilePhotos);

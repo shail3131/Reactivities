@@ -74,6 +74,8 @@ export default class ProfileStore {
                 this.profile!.image = photo.url;
                 this.loading = false;
             })
+
+            
         } catch (error) {
             toast.error('Problem setting photo as main');
             runInAction(() => {
