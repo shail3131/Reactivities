@@ -18,8 +18,7 @@ namespace Persistence.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_UserActivities", x => 
-                    new { x.AppUserId, x.ActivityId });
+                    table.PrimaryKey("PK_UserActivities", x => new { x.AppUserId, x.ActivityId });
                     table.ForeignKey(
                         name: "FK_UserActivities_Activities_ActivityId",
                         column: x => x.ActivityId,
